@@ -7,3 +7,4 @@ class Solution:
                 #print (nums[i]+nums[j])
                 if nums[i]+nums[j]==target:
                     return [i,j]
+                    
