@@ -1,10 +1,9 @@
+import itertools
+
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        ans = []
-        for i in range(len(nums)-1):
+        for i in range(len(nums)):
             for j in range(i+1,len(nums)):
+                #print (nums[i]+nums[j])
                 if nums[i]+nums[j]==target:
-                    #print ("[{0},{1}]".format(i,j))
-                    ans.append(i)
-                    ans.append(j)
-                    return ans
+                    return [i,j]
