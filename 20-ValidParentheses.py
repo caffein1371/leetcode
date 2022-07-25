@@ -1,28 +1,15 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        for i in range(len(s)-1):
-            print (s[i])
-            #print (s[i+1::])
-            ans = False
-            if s[i]=="(" and (s[i+1]!="]" or s[i+1]!="}") and ")" in s[i+1::]:
-                print (1)
-                ans = True
-            elif s[i]=="[" and (s[i+1]!=")" or s[i+1]!="}") and "]" in s[i+1::]:
-                print (2)
-                ans = True
-            elif s[i]=="{" and (s[i+1]!=")" or s[i+1]!="]") and "}" in s[i+1::]:
-                print (3)
-                ans = True
-            if s[i]=="(" and (s[i+1]=="]" or s[i+1]=="}"):
-                print (4)
-                ans = False
-            elif s[i]=="[" and (s[i+1]==")" or s[i+1]=="}"):
-                print (5)
-                ans = False
-            elif s[i]=="{" and (s[i+1]=="]" or s[i+1]==")"):
-                print (6)
-                ans = False
-                
-        return ans
-                
-            
+        stack =[]
+        dict ={")":"(","}":"{","]":"["}
+        for i in s:
+            #if i is ( or[ , { ,pushes to stack.
+            if i in dict.values():
+                stack.append(i)
+            #if i is　) or ] , },checks the stack whether ( or {,[.
+            elif i in dict.keys():
+                if stack==[] or dict[i]!=stack.pop():
+                    return False
+        # if stack is empty,returns True
+        if stack==[]:
+            return True
