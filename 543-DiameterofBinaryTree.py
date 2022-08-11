@@ -6,7 +6,7 @@
 #         self.right = right
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        ans = 0
+        ans = [0]
         #行きがけ法
         def preorder(root,ans):
             if not root:
@@ -14,10 +14,8 @@ class Solution:
             #左と右の最大値の深さを求める
             L = preorder(root.left,ans)
             R = preorder(root.right,ans)
+            ans.append(max(L+R,max(ans)))
             
             return 1+max(L,R)
-            
-        return preorder(root,ans)
-            
-            
-        
+        preorder(root,ans)
+        return max(ans)
