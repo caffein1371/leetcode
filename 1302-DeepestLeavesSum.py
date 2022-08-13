@@ -1,26 +1,30 @@
 # Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
-        maxdeep = 0
-        stack = [(root,1)]
-        ans = 0
-        while stack:
-            root,length = stack.pop()
+        self.ans = 0
+        self.depth = 0
+        self.dict = {}
+        
+        def help(root):
             if not root:
                 return 0
-            if maxdeep<length:
-                maxdeep=length
-                ans=root.val
-            elif maxdeep==length:
-                ans+=root.val
-            if root.left:
-                stack.append((root.left,length+1))
-            if root.right:
-                stack.append((root.right,length+1))
-            
-        return ans
+            L = help(root.left)
+            R = help(root.right)
+
+            if self.depth>=L+R:
+                self.depth = L+R
+                #print (L+R)
+                self.ans+=root.val
+                self.dict[self.depth]=self.ans
+                #print (root.val)
+
+            return 1+max(L,R)
+        
+        help(root)
+        print (self.dict)
+        return max(self.dict.values())
